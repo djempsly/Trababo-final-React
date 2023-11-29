@@ -4,9 +4,15 @@ import './Item.css'
 function Item(props){
     return(
         <li className="item">
-            <span>V</span>
+            <span
+            onClick={props.onComplete}
+            >V</span>
+
             <p> {props.nombre} </p>
-            <span>X</span>
+
+            <span
+            onClick={props.onDelete}
+            >X</span>
 
         </li>
     );

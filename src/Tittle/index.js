@@ -1,9 +1,9 @@
 import React from "react";
 
-function Tittle(){
+function Tittle(props){
     return(
         <h1 className="titulo">
-            Elegiste {2} de {6} articulos
+            Elegiste {props.completeArticle} de {props. total} articulos
         </h1>
     );
 }
