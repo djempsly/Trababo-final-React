@@ -1,9 +1,15 @@
 import React from "react";
+import { Context } from "../Context";
+import './Tittle.css'
 
-function Tittle(props){
+function Tittle(){
+    const { completeArticle, 
+            totalArticle
+        } = React.useContext(Context)
+
     return(
         <h1 className="titulo">
-            Elegiste {props.completeArticle} de {props. total} articulos
+            Elegiste <span>{completeArticle}</span> de <span>{totalArticle}</span>  articulos
         </h1>
     );
 }

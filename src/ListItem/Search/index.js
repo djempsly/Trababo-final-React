@@ -1,6 +1,9 @@
 import React from "react";
+import { Context } from "../../Context";
 
-function Search({searchValue, setSearchValue}){
+function Search(){
+const {searchValue, setSearchValue} = React.useContext(Context)
+
     return(
         <input className="input-search"
         placeholder="Busca tu Artículos"
