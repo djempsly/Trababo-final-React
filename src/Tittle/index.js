@@ -7,3 +7,5 @@ function Tittle(){
         </h1>
     );
 }
+
+export { Tittle}
