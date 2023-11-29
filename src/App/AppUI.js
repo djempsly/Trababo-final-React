@@ -4,31 +4,23 @@ import { Search } from '../ListItem/Search';
 import { ListItem } from '../ListItem';
 import { Item } from '../Item';
 import { Button } from '../Button';
+import { Context } from "../Context";
 
-function AppUI({
+function AppUI(){
+
+    const {
       
-    deleted,
-    completed, 
-    searchArticle, 
-    completeArticle, 
-    totalArticle, 
-    searchValue, 
-    setSearchValue, 
-}){
-
+        deleted,
+        completed, 
+        searchArticle, 
+        
+    } = React.useContext(Context)
     
     return(
         <>
-        <Tittle 
-    completeArticle = {completeArticle}
-    total = {totalArticle}
-    />
+        <Tittle />
 
-    <Search 
-    searchValue = {searchValue}
-    setSearchValue = {setSearchValue}
-    
-    />
+    <Search  />
 
     <ListItem>
       {searchArticle.map((nomb)=>
@@ -38,10 +30,8 @@ function AppUI({
        disponible = {nomb.disponible}
        onComplete = {() => completed(nomb.nombre)}
        onDelete = {()=> deleted (nomb.nombre)}
-       
        />
-
-      )}
+       )}
       
     </ListItem>
 

@@ -25,7 +25,7 @@ function useLocalStorage(nameItem, initialValue){
 
   export {useLocalStorage}
 
-  // const Products = [
+//   const Products = [
 //   {nombre: "Laptop", disponible: false},
 //   {nombre: "Televisor", disponible: false},
 //   {nombre: "Bike", disponible: false}
