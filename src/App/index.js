@@ -1,33 +1,14 @@
 import React from 'react';
-import { Tittle } from '../Tittle';
-import { Search } from '../ListItem/Search';
-import { ListItem } from '../ListItem';
-import { Item } from '../Item';
-import { Button } from '../Button';
+import { useLocalStorage } from './UseLocalStorage';
+import { AppUI } from './AppUI';
 
-// const Products = [
-//   {nombre: "Laptop", disponible: false},
-//   {nombre: "Televisor", disponible: false},
-//   {nombre: "Bike", disponible: false}
-// ]
 
-// localStorage.setItem('Lhams', JSON.stringify(Products))
+
 
 function App() {
 
-  const ArticleStorage = localStorage.getItem('Lhams')
-  let parseArticle ;
 
- if (!ArticleStorage) {
-  localStorage.setItem('Lhams', JSON.stringify([]))
-  parseArticle = []
-  
- } else {
-   parseArticle = JSON.parse(ArticleStorage)
- }
-
-
-  const [article, setArticle] = React.useState(parseArticle)
+  const [article, setArticle] = useLocalStorage('Lhams', [])
   const [searchValue, setSearchValue] = React.useState('')
 
   const completeArticle = article.filter((nomb) => 
@@ -40,17 +21,12 @@ function App() {
     return Text.includes(Value)
   }) 
 
-  const saveItem = (newItem) =>{
-    localStorage.setItem('Lhams', JSON.stringify(newItem))
-    setArticle(newItem)
-  }
-
   const completed = (nombre) =>{
     const newArticle = [...article]
     const findIndex = newArticle.findIndex(
       nomb => nomb.nombre === nombre)
     newArticle[findIndex].disponible = true;
-    saveItem(newArticle)
+    setArticle(newArticle)
   }
 
   const deleted = (nombre) =>{
@@ -58,40 +34,24 @@ function App() {
     const findIndex = newArticle.findIndex(
       nomb => nomb.nombre === nombre)
     newArticle.splice(findIndex, 1)
-    saveItem(newArticle)
+    setArticle(newArticle)
   }
 
 
 
   return (
     <div className="App">
-      <Tittle 
-      completeArticle = {completeArticle}
-      total = {totalArticle}
-      />
-
-      <Search 
-      searchValue = {searchValue}
-      setSearchValue = {setSearchValue}
-      
-      />
-
-      <ListItem>
-        {searchArticle.map((nomb)=>
-         <Item 
-         key = {nomb.nombre}
-         nombre = {nomb.nombre}
-         disponible = {nomb.disponible}
-         onComplete = {() => completed(nomb.nombre)}
-         onDelete = {()=> deleted (nomb.nombre)}
-         
-         />
-
-        )}
-        
-      </ListItem>
-
-      <Button />
+     <AppUI
+     
+     deleted = {deleted}
+     completed = {completed}
+     searchArticle = {searchArticle}
+     completeArticle = {completeArticle}
+     totalArticle = {totalArticle}
+     searchValue = {searchValue} 
+     setSearchValue = {setSearchValue}
+     
+     />
 
     </div>
   );
