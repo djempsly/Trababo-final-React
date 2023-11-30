@@ -6,6 +6,7 @@ function ItemProvider({children}){
     
   const [article, setArticle] = useLocalStorage('Lhams', [])
   const [searchValue, setSearchValue] = React.useState('')
+  const [openModal, setOpenModal] = React.useState(true)
 
   const completeArticle = article.filter((nomb) => 
   nomb.disponible).length
@@ -43,7 +44,9 @@ function ItemProvider({children}){
             completeArticle, 
             totalArticle, 
             searchValue, 
-            setSearchValue, 
+            setSearchValue,
+            openModal, 
+            setOpenModal
         }} > 
             {children}
         </Context.Provider>

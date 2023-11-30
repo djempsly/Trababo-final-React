@@ -1,19 +1,19 @@
 import React from "react";
 import { Tittle } from '../Tittle';
-import { Search } from '../ListItem/Search';
+import { Search } from '../Search';
 import { ListItem } from '../ListItem';
 import { Item } from '../Item';
 import { Button } from '../Button';
 import { Context } from "../Context";
+import { Modal } from "../Modal";
 
 function AppUI(){
 
     const {
-      
         deleted,
         completed, 
         searchArticle, 
-        
+        openModal
     } = React.useContext(Context)
     
     return(
@@ -35,8 +35,14 @@ function AppUI(){
       
     </ListItem>
 
-    <Button /></>
-
+    <Button />
+        {openModal && (
+            <Modal>
+                <p>Hola muchacho como estás</p>
+            </Modal>
+        )
+        }
+    </>
     );
 }
 

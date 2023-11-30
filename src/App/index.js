@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       <ItemProvider>
-       <AppUI  />
+         <AppUI  />
       </ItemProvider>
 
     </div>
