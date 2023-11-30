@@ -6,6 +6,10 @@ import { Item } from '../Item';
 import { Button } from '../Button';
 import { Context } from "../Context";
 import { Modal } from "../Modal";
+import { AddItem } from "../AddItem";
+import { Cargando } from "../Cargando";
+import { Error } from "../Error";
+import { CreaItem } from "../CreaItem";
 
 function AppUI(){
 
@@ -13,7 +17,9 @@ function AppUI(){
         deleted,
         completed, 
         searchArticle, 
-        openModal
+        openModal,
+        error,
+        loading
     } = React.useContext(Context)
     
     return(
@@ -23,6 +29,11 @@ function AppUI(){
     <Search  />
 
     <ListItem>
+        {loading && <Cargando />}
+        {error && <Error />}
+        {(!loading && searchArticle.length === 0) 
+        && <CreaItem/>}
+
       {searchArticle.map((nomb)=>
        <Item 
        key = {nomb.nombre}
@@ -36,9 +47,9 @@ function AppUI(){
     </ListItem>
 
     <Button />
-        {openModal && (
-            <Modal>
-                <p>Hola muchacho como estás</p>
+        {openModal && 
+        (    <Modal>
+                < AddItem/>
             </Modal>
         )
         }

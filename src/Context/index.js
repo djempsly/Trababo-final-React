@@ -3,10 +3,15 @@ import { useLocalStorage } from "./UseLocalStorage";
 const Context = React.createContext ()
 
 function ItemProvider({children}){
+   
     
-  const [article, setArticle] = useLocalStorage('Lhams', [])
+  const {item:article, 
+       saveItem:setArticle, 
+        error, 
+        loading} = useLocalStorage('Lhams', [])
+
   const [searchValue, setSearchValue] = React.useState('')
-  const [openModal, setOpenModal] = React.useState(true)
+  const [openModal, setOpenModal] = React.useState(false)
 
   const completeArticle = article.filter((nomb) => 
   nomb.disponible).length
@@ -17,6 +22,16 @@ function ItemProvider({children}){
     const Value = searchValue.toLocaleLowerCase()
     return Text.includes(Value)
   }) 
+
+  const addItem = (nombre) =>{
+    const newArticle = [...article]
+    newArticle.push({
+         nombre,
+        disponible:false
+    })
+  
+    setArticle(newArticle)
+  }
 
   const completed = (nombre) =>{
     const newArticle = [...article]
@@ -46,7 +61,10 @@ function ItemProvider({children}){
             searchValue, 
             setSearchValue,
             openModal, 
-            setOpenModal
+            setOpenModal,
+            addItem,
+            error,
+            loading
         }} > 
             {children}
         </Context.Provider>
